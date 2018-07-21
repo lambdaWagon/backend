@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/lambdaWagon/backend#readme",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "helmet": "^3.12.2"
   },
