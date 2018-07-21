@@ -1,7 +1,14 @@
 import dotenv from 'dotenv'
 import admin from 'firebase-admin'
 
-import serviceAccount from '../../serviceAccount.json'
+let serviceAccount
+
+try {
+  serviceAccount = admin.credential.cert(require('../../serviceAccount.json'))
+} catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') console.log('⚠️  serviceAccount.json is missing')
+  else console.log(e)
+}
 
 dotenv.config()
 
@@ -15,6 +22,6 @@ export default {
     projectId: process.env.projectId,
     storageBucket: process.env.storageBucket,
     messagingSenderId: process.env.messagingSenderId,
-    credential: admin.credential.cert(serviceAccount),
+    credential: serviceAccount,
   }
 }
